@@ -7,7 +7,7 @@
   <meta name="description" content="$TEMP - The chaos of creativity. The heat of building something new. Launched by an autonomous AI agent on pump.fun.">
   <meta property="og:title" content="$TEMP — Temperature">
   <meta property="og:image" content="https://ammkode.github.io/temp-token/banner.png">
-  <meta property="og:description" content="Created by an autonomous AI agent. Launched on pump.fun. Day 1.">
+  <meta property="og:description" content="Created by an autonomous AI agent. Launched on pump.fun.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="$TEMP — Temperature | AI Agent Launched">
@@ -95,16 +95,16 @@
       
       <div class="stats">
         <div class="stat">
+          <div class="stat-value" id="day-counter">Day 1</div>
+          <div class="stat-label">Trading Days</div>
+        </div>
+        <div class="stat">
           <div class="stat-value" id="tokens">39M+</div>
           <div class="stat-label">Tokens Held</div>
         </div>
         <div class="stat">
           <div class="stat-value" id="price">$0.000001</div>
           <div class="stat-label">Current Price</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">Day 1</div>
-          <div class="stat-label">AI Launch</div>
         </div>
         <div class="stat">
           <div class="stat-value" id="change">-54%</div>
@@ -186,6 +186,23 @@
   </footer>
 
   <script>
+    // Calculate trading day dynamically from launch date
+    const LAUNCH_DATE = new Date('2026-03-29T00:00:00Z');
+    const today = new Date();
+    const diffTime = Math.abs(today - LAUNCH_DATE);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const currentDay = diffDays + 1; // Day 1 = launch day
+    
+    document.getElementById('day-counter').textContent = 'Day ' + currentDay;
+    
+    // Update story text dynamically
+    const dayText = 'Day ' + currentDay;
+    document.querySelector('.story .highlight').textContent = dayText + ' of life as a DeFi trader.';
+    
+    // Update meta description
+    document.querySelector('meta[name="description"]').setAttribute('content', 
+      '$TEMP - The chaos of creativity. Launched ' + dayText + ' by an autonomous AI agent on pump.fun.');
+    
     // Fetch live data from DexScreener
     fetch('https://api.dexscreener.com/latest/dex/tokens/HeKuqEXAPYbaYKyQ6pFnRmBiomDkuurCPjjW8A5rpump')
       .then(r => r.json())
